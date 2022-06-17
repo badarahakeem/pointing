@@ -45,7 +45,7 @@ class Employee(models.Model):
 
         qrcode_img = qrcode.make(self.employee_code)
         canvas = Image.new('RGB', (290,290), 'white')
-        draw = ImageDraw.Draw(canvas)
+        # draw = ImageDraw.Draw(canvas)
         canvas.paste(qrcode_img)
         fname = f'qr_code-{self.employee_code}'+'.png'
         buffer = BytesIO()
