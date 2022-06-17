@@ -50,7 +50,7 @@ class Employee(models.Model):
         file_name = f'{self.employee_code}-{self.id}qr.png'
         stream = BytesIO()
         qr_offset.save(stream, 'PNG')
-        self.qr_field.save(file_name, File(stream), save=False)
+        self.qr_code.save(file_name, File(stream), save=False)
         qr_offset.close()
         super().save(*args, **kwargs)
         # imag = Image.open(self.avatar.path)
