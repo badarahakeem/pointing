@@ -26,7 +26,8 @@ DATABASES['default'].update(prod_db)
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dj8o7x845',
     'API_KEY': '466667418754698',
