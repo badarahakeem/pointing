@@ -1,0 +1,78 @@
+{% load qr_code %}
+<style>
+    #uni_modal .modal-footer {
+        display: none
+    }
+    
+    #uni_modal .modal-sub-footer {
+        display: flex
+    }
+    
+    .id-card {
+        width: 3in;
+        height: 52vh;
+        border: 2px solid var(--bs-dark);
+        padding: 2rem 1.5rem;
+    }
+    
+    {% comment %} #qr-style {
+        width: 8rem;
+        height: 8rem;
+    } {% endcomment %}
+
+    #qr-style, #card-avatar {
+        width: 9rem;
+        height: 9rem;
+    }
+</style>
+<div class="container-fluid" id="id-card">
+    <div class="d-flex mb-3">
+        <div class="px-2">
+            <div class="id-card">
+                {% comment %} <div class="head-text text-center fw-bolder">{{employee.name}}</div> {% endcomment %}
+                <div class="head-text text-center fw-bolder">
+                    <img src="{% if employee.avatar %}{{employee.avatar.url}}{% endif %}" id="card-avatar" class="img-thumbnail mb-3" alt="">
+                </div>
+                <div class="lh-1">
+                    <div class="text-center fw-bold">{{ employee.name }}</div>
+                    <div class="text-center fw-light text-sm">{{ employee.department }}</div>
+                    <div class="text-center fw-light text-sm">{{ employee.position }}</div>
+                </div>
+                <div class="lh-1 text-center">
+                    <img src="{{employee.qr_code.url}}"
+                    id="qr-style" alt="">
+                    <div class="text-center"><b>{{employee.employee_code}}</b></div>
+                </div>
+            </div>
+        </div>
+        <div class="px-2">
+            <div class="id-card">
+                <div class="lh-1">
+                    <dl>
+                        <dt>Reference</dt>
+                        <dd>{{employee.employee_code}}</dd>
+                        <dt>Departement</dt>
+                        <dd>{{employee.department}}</dd>
+                        <dt>Position</dt>
+                        <dd>{{employee.position}}</dd>
+                        <dt>Sexe</dt>
+                        <dd>{{employee.gender}}</dd>
+                        <dt>Date de naissance</dt>
+                        <dd>{{employee.dob|date:'d M, Y'}}</dd>
+                        <dt>Contacte #</dt>
+                        <dd>{{employee.contact}}</dd>
+                        <dt>Email</dt>
+                        <dd>{{employee.email}}</dd>
+                        <dt>Addresse</dt>
+                        <dd><small>{{employee.address}}</small></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function() {
+
+    })
+</script>

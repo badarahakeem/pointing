@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% load humanize %} {% load customfilter %} {% block pageContent %}
+
+<!--Section: Content-->
+<h3 class="fw-bolder">{{page_title}}</h3>
+<hr>
+<section class="py-3">
+    <div class="container">
+        <div class="card rounded-0 shadow-sm blur">
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="text-end mb-2">
+                        <a href="{% url 'add-employee' %}" class="btn btn-primary btn-sm rounded-0 bg-gradient"><i class="fa fa-plus"></i> Ajouter un Employé</a>
+                    </div>
+                    <table class="table table-stripped table-bordered">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="15%">
+                            <col width="20%">
+                            <col width="25%">
+                            <col width="25%">
+                            <col width="10%">
+                        </colgroup>
+                        <thead>
+                            <tr class="bg-primary bg-gradient text-light">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Reference</th>
+                                <th class="text-center">Nom</th>
+                                <th class="text-center">Debut</th>
+                                <th class="text-center">Fin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for point in points %}
+                            <tr>
+                                <td class="text-center">{{forloop.counter}}</td>
+                                
+                                <td class="">{{point.employee.employee_code}}</td>
+                                <td class="">{{point.employee}}</td>
+                                <td class="">{{ point.clock_time}}</td>
+                                <td class="">{{ point.clock_out}}</td>
+
+                            </tr>
+                            {% endfor %} 
+                            {% if not points %}
+                            <tr>
+                                <th colspan="6" class="text-center">No records.</th>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div> {% endblock pageContent %} 

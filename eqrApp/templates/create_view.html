@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% load humanize %} {% load customfilter %} {% load qr_code %} {% load static %} {% block pageContent %} {% block headerContent %}
+<style>
+    img.img-thumbnail.avatar {
+        max-width: 200px;
+        max-height: 200px;
+    }
+</style>
+{% endblock headerContent %}
+<!--Section: Content-->
+<h3 class="fw-bolder">{{page_title}}</h3>
+<hr>
+<section class="py-3">
+    <div class="container">
+        <div class="card rounded-0 shadow-sm blur">
+            <div class="card-body">
+                <div class="container-fluid">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-md-12">
+                                <div class="form-group mb-6">
+                                    {{form.id}}
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="clear-fix py-2"></div>
+                        <div class="text-end">
+                            <input type="submit" class="btn" />
+                            <a href="{% url 'employee-page' %}" class="btn btn-default border btn-sm rounded-0 bg-gradient"><i class="fa fa-angle-left"></i> Annuler</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div> {% endblock pageContent %}

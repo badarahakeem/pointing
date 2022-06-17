@@ -1,0 +1,1 @@
+web: gunicorn pointing.wsgi --log-file -
