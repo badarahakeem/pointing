@@ -24,7 +24,7 @@ MIDDLEWARE += ["whitenoise.middleware.WhiteNoiseMiddleware",]
 prod_db  =  dj_database_url.config()
 DATABASES['default'].update(prod_db)
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE = {
