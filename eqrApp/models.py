@@ -54,11 +54,11 @@ class Employee(models.Model):
         canvas.close()
         super().save(*args, **kwargs)
 
-        # imag = Image.open(self.avatar.path)
-        # if imag.width > 200 or imag.height > 200:
-        #     output_size = (200, 200)
-        #     imag.thumbnail(output_size)
-        #     imag.save(self.avatar.path)
+        imag = Image.open(self.avatar.path)
+        if imag.width > 200 or imag.height > 200:
+            output_size = (200, 200)
+            imag.thumbnail(output_size)
+            imag.save(self.avatar.path)
         
 
 
