@@ -6,8 +6,8 @@ import cloudinary_storage
 
 
   
-DEBUG = False
-TEMPLATE_DEBUG = False
+DEBUG = True
+TEMPLATE_DEBUG = True
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
