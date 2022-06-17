@@ -6,8 +6,8 @@ import dj_database_url
 
 
 
-DEBUG = False
-TEMPLATE_DEBUG = False
+DEBUG = True
+TEMPLATE_DEBUG = True
 
 SECRET_KEY = 'DNt;*d7X4"MZ#;#%;YJEiApKs/[(TJ4l#>XYv$2G@n>7AkoROLYLXW)^=CaQ;a]'
 
