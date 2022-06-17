@@ -50,8 +50,11 @@ class Employee(models.Model):
         fname = f'qr_code-{self.employee_code}'+'.png'
         buffer = BytesIO()
         canvas.save(buffer, 'PNG')
-        self.qr_code.save(fname, File(buffer), save=False)
-        canvas.close()
+        try:
+            self.qr_code.save(fname, File(buffer), save=False)
+            canvas.close()
+        except:
+            pass
         super().save(*args, **kwargs)
         # imag = Image.open(self.avatar.path)
         # if imag.width > 200 or imag.height > 200:
