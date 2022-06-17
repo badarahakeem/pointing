@@ -23,7 +23,7 @@ class Employee(models.Model):
     department = models.TextField(null=True, blank=True)
     position = models.TextField(null=True, blank=True)
     avatar = models.ImageField(upload_to = "employee-avatars/",null=True, blank=True)
-    qr_code = models.ImageField(upload_to = 'qr_code', unique=True, blank=True, null=True)
+    qr_code = models.ImageField(upload_to = 'qr_code', blank=True, null=True)
     date_added = models.DateTimeField(default = timezone.now)
     date_created = models.DateTimeField(auto_now = True)
 
@@ -43,17 +43,16 @@ class Employee(models.Model):
             password = ''.join(secrets.choice(alphabet) for i in range(8))
             self.employee_code  = password
 
-        qrcode_img = qrcode.make(self.employee_code)
-        canvas = Image.new('RGB', (290,290), 'white')
-        # draw = ImageDraw.Draw(canvas)
-        canvas.paste(qrcode_img)
-        fname = f'qr_code-{self.employee_code}'+'.png'
-        buffer = BytesIO()
-        canvas.save(buffer, 'PNG')
-        self.qr_code.save(fname, File(buffer), save=False)
-        canvas.close()
+        # qrcode_img = qrcode.make(self.employee_code)
+        # canvas = Image.new('RGB', (290,290), 'white')
+        # # draw = ImageDraw.Draw(canvas)
+        # canvas.paste(qrcode_img)
+        # fname = f'qr_code-{self.employee_code}'+'.png'
+        # buffer = BytesIO()
+        # canvas.save(buffer, 'PNG')
+        # self.qr_code.save(fname, File(buffer), save=False)
+        # canvas.close()
         super().save(*args, **kwargs)
-
         imag = Image.open(self.avatar.path)
         if imag.width > 200 or imag.height > 200:
             output_size = (200, 200)
