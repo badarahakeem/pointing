@@ -19,12 +19,14 @@ INSTALLED_APPS += [
 	'cloudinary_storage',
 ]
 
-MIDDLEWARE += ["whitenoise.middleware.WhiteNoiseMiddleware",]
+# MIDDLEWARE += ["whitenoise.middleware.WhiteNoiseMiddleware",]
  
 prod_db  =  dj_database_url.config()
 DATABASES['default'].update(prod_db)
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE = {
