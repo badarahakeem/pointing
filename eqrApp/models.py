@@ -12,7 +12,7 @@ from django.core.files import File
 
 # Create your models here.
 class Employee(models.Model):
-    employee_code = models.CharField(max_length=100, unique=True, blank=True)
+    employee_code = models.CharField(max_length=100, unique=True, editable=False, blank=True)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     gender = models.CharField(max_length=50, choices=(("Male","Male"), ("Female","Female")), default="Male")
@@ -38,20 +38,20 @@ class Employee(models.Model):
 
     def save(self, *args, **kwargs):
         
-        # if not self.employee_code or len(self.employee_code) is None:
-        #     alphabet = string.digits
-        #     password = ''.join(secrets.choice(alphabet) for i in range(8))
-        #     self.employee_code  = password
+        if not self.employee_code or len(self.employee_code) is None:
+            alphabet = string.digits
+            password = ''.join(secrets.choice(alphabet) for i in range(8))
+            self.employee_code  = password
 
-        qr_image = qrcode.make(self.employee_code)
-        qr_offset = Image.new('RGB', (310, 310), 'white')
-        draw_img = ImageDraw.Draw(qr_offset)
-        qr_offset.paste(qr_image)
-        file_name = f'{self.employee_code}-{self.id}qr.png'
-        stream = BytesIO()
-        qr_offset.save(stream, 'PNG')
-        self.qr_code.save(file_name, File(stream), save=False)
-        qr_offset.close()
+        qrcode_img = qrcode.make(self.employee_code)
+        canvas = Image.new('RGB', (290,290), 'white')
+        # draw = ImageDraw.Draw(canvas)
+        canvas.paste(qrcode_img)
+        fname = f'qr_code-{self.employee_code}'+'.png'
+        buffer = BytesIO()
+        canvas.save(buffer, 'PNG')
+        self.qr_code.save(fname, File(buffer), save=False)
+        canvas.close()
         super().save(*args, **kwargs)
         # imag = Image.open(self.avatar.path)
         # if imag.width > 200 or imag.height > 200:
