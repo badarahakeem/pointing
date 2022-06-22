@@ -13,7 +13,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pointingdb',
         'USER':  'postgres',
-        'PASSWORD': 'mugiwara',
+        'PASSWORD': 'mugiwara',	
         'HOST': 'localhost',
         'PORT': '5432',
     }
