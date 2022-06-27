@@ -9,6 +9,7 @@ from eqrApp import models, forms
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from eqrApp.models import Employee, Pointing
+from structures.models import Agent, Society
 
 
 
@@ -68,10 +69,13 @@ def logout_user(request):
 
 @login_required
 def employee_list(request):
+    agent_id = Agent.objects.get(user = request.user)
+    sos_id = Society.objects.filter(id = agent_id.society_id.id)
+    print(sos_id)
     context =context_data()
     context['page'] = 'employee_list'
     context['page_title'] = 'Liste des Employés'
-    context['employees'] = models.Employee.objects.all()
+    context['employees'] = models.Employee.objects.filter(agent__society_id = sos_id[0])
 
     return render(request, 'employee_list.html', context)
 
@@ -91,6 +95,8 @@ def manage_employee(request, pk=None):
 
 @login_required
 def save_employee(request):
+    agent_id = Agent.objects.get(user = request.user)
+    print(agent_id)
     resp = { 'status' : 'failed', 'msg' : '' }
     if not request.method == 'POST':
         resp['msg'] = "No data has been sent into the request."
@@ -102,7 +108,9 @@ def save_employee(request):
             employee = models.Employee.objects.get(id = request.POST['id'])
             form = forms.SaveEmployee(request.POST, request.FILES, instance = employee)
         if form.is_valid():
-            form.save()
+            inst = form.save(commit=False)
+            inst.agent = agent_id
+            inst.save()
             if request.POST['id'] == '':
                 messages.success(request, f"{request.POST.get('employee_code')} has been added successfully.")
             else:

@@ -2,6 +2,7 @@ from distutils.command.upload import upload
 from email.policy import default
 import secrets, string
 from django.db import models
+from structures.models import Agent
 from django.utils import timezone
 from django.dispatch import receiver
 import qrcode
@@ -12,6 +13,7 @@ from django.core.files import File
 
 # Create your models here.
 class Employee(models.Model):
+    agent = models.ForeignKey(Agent, verbose_name=("Agent"), on_delete=models.CASCADE, null=True)
     employee_code = models.CharField(max_length=100, unique=True, editable=False, blank=True)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
